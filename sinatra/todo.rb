@@ -88,6 +88,7 @@ class Forecast
   end
 
   def self.ten_day_forecast(key, state, city)
+    raise 'You must provide a Weather Underground API Key' unless key
     url= "/api/#{ key }/forecast10day/q/#{ state}/#{ city }.json"
     consume(CONNECTION.get(url).body)
   end
@@ -99,6 +100,7 @@ class Forecast
   end
 
   def self.get_forecast_days(body)
+    # binding.pry
     body['forecast']['simpleforecast']['forecastday']
   end
 
