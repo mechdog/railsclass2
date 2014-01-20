@@ -66,11 +66,6 @@ Task.auto_upgrade!
 
 class List
     TEMPLATE = ERB.new(<<-EOS, nil, '-')
-  # To Do List
-  <% @tasks.each do |task| -%>
-    - [<%= task.done? ? 'x' :  ' ' %>] <%= task %>
-    <% end %>
-  EOS
 # To Do List
 <% @tasks.each do |task| -%>
 - [<%= task.done? ? 'x' :  ' ' %>] <%= task %>
