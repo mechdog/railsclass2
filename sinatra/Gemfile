@@ -4,4 +4,6 @@ gem 'sinatra'
 gem 'data_mapper'
 gem 'dm-postgres-adapter'
 gem 'gist'
+gem 'faraday' #Works with web requests/API wrapper
+gem 'faraday_middleware'
 

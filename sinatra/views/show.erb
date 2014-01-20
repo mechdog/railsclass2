@@ -1,0 +1,26 @@
+<form action="<%= @task_id %>" method="post">
+    <input type="hidden" name="_method" value="put">
+    <input type="hidden" name="done" value="0">
+    <fieldset>
+      <label>
+        Description
+        <input type="text" name="description" size="60" value="<%= @task.description %>">
+      </label>
+    </fieldset>
+    
+    <fieldset>
+      <label>
+        <input type="checkbox" name="done" value="1"
+          <%= 'checked="checked"' if @task.done? %>>
+          Done
+      </label>
+    </fieldset>
+
+    <fieldset>
+      <label>
+        Due Date
+        <input type="date" name="due_date" value="<%= @task.due_date %>">
+      </label>
+    </fieldset>
+    <input type="submit" value="Submit">
+  </form>

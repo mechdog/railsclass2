@@ -1,4 +1,5 @@
 DATABASE_URL = ENV['DATABASE_URL'] || 'postgres://localhost/to_do_app'
+WEATHER_UNDERGROUND_API_KEY = ENV['WEATHER_UNDERGROUND_API_KEY'] || '7e4220992d5fe025'
 
 DataMapper::Logger.new($stdout, :debug)
 DataMapper.setup(:default, DATABASE_URL)
@@ -41,6 +42,7 @@ class Task < SimpleStore
   property :id, Serial
   property :description, String
   property :done, Boolean
+  property :due_date, Date
 
   # attr_accessor :description
 
@@ -51,6 +53,12 @@ class Task < SimpleStore
   def to_s
       description
   end
+
+  def due_date=(date)
+      date = nil if date == ''
+      super date
+  end
+
 end
 
 DataMapper.finalize
@@ -73,12 +81,45 @@ class List
   end
 end
 
+class Forecast
+  CONNECTION = Faraday.new url: 'http://api.wunderground.com' do |connection|
+    connection.response :json, :content_type => /\bjson$/
+    connection.adapter Faraday.default_adapter
+  end
+
+  def self.ten_day_forecast(key, state, city)
+    puts key 
+    url= "/api/#{ key }/forecast10day/q/#{ state}/#{ city }.json"
+    consume(CONNECTION.get(url).body)
+  end
+
+  def self.consume(body)
+    get_forecast_days(body).reduce({}) do |all, forecast_day|
+      all.merge(get_date(forecast_day) => get_icon(forecast_day))
+    end
+  end
+
+  def self.get_forecast_days(body)
+    puts body
+    body['forecast']['simpleforecast']['forecastday']
+  end
+
+  def self.get_date(forecast_day)
+    year, month, day = forecast_day['date'].values_at('year', 'month', 'day')
+    Date.new(year, month, day)
+  end
+
+  def self.get_icon(forecast_day)
+    forecast_day['icon_url']
+  end
+end
 
 class ToDoApp < Sinatra::Base
   get '/' do
     # Task.create(description: 'Create web application!')
     # Task.create(description: 'Profit from it')
     @tasks = Task.all
+    @forecast = Forecast.ten_day_forecast(WEATHER_UNDERGROUND_API_KEY, 'GA', 'Atlanta')
     erb :index
   end
 
@@ -106,5 +147,35 @@ class ToDoApp < Sinatra::Base
     redirect gist['html_url']
   end
 
+  get '/:id' do
+    @task = Task.get(params[:id])
+    erb :show
+  end
+
+  put '/:id' do
+    task= Task.get(params[:id])
+    task.update(
+      description: params[:description],
+      done: params[:done],
+      due_date: params[:due_date]
+      )
+    redirect '/'
+  end
+
 end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
