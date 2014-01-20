@@ -1,6 +1,3 @@
-require 'sinatra/base'
-require 'data_mapper'
-
 DATABASE_URL = ENV['DATABASE_URL'] || 'postgres://localhost/to_do_app'
 
 DataMapper::Logger.new($stdout, :debug)
