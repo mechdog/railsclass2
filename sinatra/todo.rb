@@ -56,6 +56,24 @@ end
 DataMapper.finalize
 Task.auto_upgrade!
 
+class List
+    TEMPLATE = ERB.new(<<-EOS, nil, '-')
+  # To Do List
+  <% @tasks.each do |task| -%>
+    - [<%= task.done? ? 'x' :  ' ' %>] <%= task %>
+    <% end %>
+  EOS
+
+  def initialize(tasks)
+    @tasks = tasks
+  end
+
+  def to_markdown
+    TEMPLATE.result(binding)
+  end
+end
+
+
 class ToDoApp < Sinatra::Base
   get '/' do
     # Task.create(description: 'Create web application!')
@@ -80,6 +98,12 @@ class ToDoApp < Sinatra::Base
     task = Task.get(params[:id])
     task.destroy
     redirect '/'
+  end
+
+  post '/export' do
+    list = List.new(Task.all)
+    gist = Gist.gist(list.to_markdown, filename: 'ToDoList.md')
+    redirect gist['html_url']
   end
 
 end

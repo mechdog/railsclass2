@@ -5,14 +5,12 @@
     <li>
       <form action="/<%= task.id %>" method="post" style="display: inline">
         <input type="hidden" name="_method" value="patch">
-        <input type="submit" value="&#10003;">
-        
+        <input type="submit" value="&#10003;">      
       </form>
 
       <form action="/<%= task.id %>" method="post" style="display: inline">
         <input type="hidden" name="_method" value="delete">
-        <input type="submit" value="&times;">
-        
+        <input type="submit" value="&times;">       
       </form>
 
       <% if task.done? %>
@@ -28,4 +26,8 @@
 <form action="/" method="post">
   <input type="text" name="description" placeholder="Add a new task">
   <input type="submit" value="Add">
+</form>
+
+<form action="/export" method="post">
+  <input type="submit" value="Export to Gist">       
 </form>
