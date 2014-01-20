@@ -88,7 +88,6 @@ class Forecast
   end
 
   def self.ten_day_forecast(key, state, city)
-    puts key 
     url= "/api/#{ key }/forecast10day/q/#{ state}/#{ city }.json"
     consume(CONNECTION.get(url).body)
   end
@@ -100,7 +99,6 @@ class Forecast
   end
 
   def self.get_forecast_days(body)
-    puts body
     body['forecast']['simpleforecast']['forecastday']
   end
 
