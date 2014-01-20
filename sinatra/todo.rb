@@ -71,6 +71,11 @@ class List
     - [<%= task.done? ? 'x' :  ' ' %>] <%= task %>
     <% end %>
   EOS
+# To Do List
+<% @tasks.each do |task| -%>
+- [<%= task.done? ? 'x' :  ' ' %>] <%= task %>
+<% end %>
+EOS
 
   def initialize(tasks)
     @tasks = tasks
