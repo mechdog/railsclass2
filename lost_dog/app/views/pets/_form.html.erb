@@ -1,0 +1,31 @@
+<%= form_for(@pet) do |f| %>
+  <% if @pet.errors.any? %>
+    <ul>
+      <% @pet.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  <% end %>
+    
+<div>
+  <%= f.label :name %>
+  <%= f.text_field :name %>
+</div>
+
+<div>
+  <%= f.label :breed %>
+  <%= f.text_field :breed %>
+</div>
+
+<div>
+  <%= f.label :color %>
+  <%= f.select :color, ['black', 'white', 'spotted', 'brindle'] %>
+</div>
+
+<div>
+  <%= f.label :last_seen_at %>
+  <%= f.datetime_select :last_seen_at %>
+</div>
+
+<%= f.submit %>
+<% end %>

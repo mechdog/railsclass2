@@ -1,0 +1,20 @@
+<h1><%= @pet.name %></h1>
+
+<dl>
+  <dt>Breed</dt>
+  <dd><%= @pet.breed %></dd>
+</dl>
+
+<dl>
+  <dt>Color</dt>
+  <dd><%= @pet.color %></dd>
+</dl>
+
+<dl>
+  <dt>Last Seen</dt>
+  <dd><%= @pet.last_seen_at %></dd>
+</dl>
+
+<div>
+  <%= link_to "Edit", edit_pet_path(@pet) %> | <%= link_to "Show All", pets_path %>
+</div>

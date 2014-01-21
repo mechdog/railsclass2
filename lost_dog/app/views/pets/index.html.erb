@@ -1,0 +1,30 @@
+<h1>All Pets</h1>
+
+<div>
+  <%= link_to "Create new entry", new_pet_path %>
+</div>
+
+<table>
+  <thead>
+    <tr>
+      <td>Name</td>  
+      <td>Breed</td>
+      <td>Color</td>
+      <td>Last Seen</td>
+      <td></td>
+      <td></td>
+    </tr>
+  </thead>
+  <tbody>
+    <% @pets.each do |pet| %>
+      <tr>
+        <td><%= pet.name %></td>
+        <td><%= pet.breed %></td>
+        <td><%= pet.color %></td>
+        <td><%= pet.last_seen_at %></td>
+        <td><%= link_to "View", pet_path(pet) %></td>
+        <td><%= link_to "Edit", edit_pet_path(pet) %></td>  
+      </tr>
+     <% end %> 
+  </tbody>
+</table>
