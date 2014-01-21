@@ -8,6 +8,12 @@
 </head>
 <body>
 
+<% if current_user.present?  %>
+  <div>
+    Signed in as <%= current_user.email %> (<%= link_to "signout", sessions_path, method: :delete %>)
+  </div>
+<% end  %>
+
 <% flash.each do |name, msg| %>
   <%= content_tag :div, msg, class: name %>
 <% end %>
