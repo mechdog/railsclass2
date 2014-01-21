@@ -1,4 +1,11 @@
 LostDog::Application.routes.draw do
+
+  get 'pets' => 'pets#index'
+  get 'pets/:id' => 'pets#show', as: :pet
+  post 'pets' => 'pets#create'
+  patch 'pets/:id' => 'pets#update'
+  delete 'pets/:id' => 'pets#destroy'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
