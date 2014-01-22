@@ -1,0 +1,19 @@
+<%= form_for([@recipe, @ingredient]) do |f| %>
+  <fieldset>
+    <%= f.label :name %>
+    <%= f.text_area :name %>
+  </fieldset>
+
+  <fieldset>
+    <%= f.label :amount %>
+    <%= f.number_field :amount %>
+  </fieldset>
+
+  <fieldset>
+    <%= f.label :unit %>
+    <%= f.text_field :unit %>
+  </fieldset>
+
+  <%= f.submit %>
+
+<% end %>

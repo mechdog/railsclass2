@@ -1,0 +1,23 @@
+<%= form_for(@recipe) do |f| %>
+  <fieldset>
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+  </fieldset>
+
+  <fieldset>
+    <%= f.label :description %>
+    <%= f.text_area :description %>
+  </fieldset>
+
+  <fieldset>
+    <%= f.label :preparation_time %>
+    <%= f.number_field :preparation_time %>
+  </fieldset>
+
+  <fieldset>
+    <%= f.label :servings_yielded %>
+    <%= f.number_field :servings_yielded %>
+  </fieldset>
+
+  <%= f.submit %>
+  <% end %>

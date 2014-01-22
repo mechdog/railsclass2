@@ -1,0 +1,26 @@
+<h1>Recipes Admin</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Desciption</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @recipes.each do |recipe| %>
+      <tr>
+        <td><%= recipe.name %></td>
+        <td><%= recipe.description %></td>
+        <td>
+          <%= link_to 'show', recipe %>
+          <%= link_to 'Edit', edit_recipe_path(recipe) %>
+          <%= link_to 'Delete', admin_recipe_path(recipe), method: :delete %>
+        </td>
+      </tr>
+    <% end  %>  
+  </tbody>
+</table>
+
+<p><%= link_to 'New Recipe', new_recipe_path %></p>

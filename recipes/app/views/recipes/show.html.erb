@@ -1,0 +1,31 @@
+<h1><%= @recipe.name %></h1>
+<p><%= @recipe.description %></p>
+<p>
+  <%= @recipe.likes %> likes
+  (<%= link_to 'like', like_recipe_path(@recipe), method: :patch %>)
+</p>
+<p>Preperation time: <%= @recipe.preparation_time %> minutes</p>
+<p>Servings Yield: <%= @recipe.servings_yielded %> (Big Eaters: <%= @recipe.servings_yielded/2 %>)</p>
+
+<h2>Ingredients</h2>
+
+<ul>
+  <% @recipe.ingredients.each do |ingredient| %>
+    <li>
+      <%= ingredient.amount %> <%= ingredient.unit %> <%= ingredient.name %> 
+      <small>
+        <%= link_to 'Edit', edit_recipe_ingredient_path(@recipe,ingredient) %>
+        <%= link_to 'Remove', recipe_ingredient_path(@recipe, ingredient), method: :delete %>
+      </small>
+    </li>
+  <% end %>
+</ul>
+
+<%= link_to 'Add new ingredient', new_recipe_ingredient_path(@recipe) %>
+
+<%= link_to 'Edit', edit_recipe_path(@recipe) %>
+<%= link_to 'Delete', @recipe, method: :delete %>
+
+<%= link_to 'Index', recipes_path %>
+
+
