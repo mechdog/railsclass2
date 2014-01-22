@@ -1,4 +1,5 @@
 UtilitiesDashboard::Application.routes.draw do
+  get "homes/show"
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
@@ -53,4 +54,6 @@ UtilitiesDashboard::Application.routes.draw do
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products
   #   end
+
+  root to: 'homes#show'
 end
