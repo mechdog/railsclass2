@@ -1,45 +1,46 @@
 class UtilitiesController < ApplicationController
 
 # protect_from_forgery with: :null_session, only: :create # Ignores CSRF token
+before_filter :authenticate_user!
 
 respond_to :html, :json
 
   def index
-    @utilities = Utility.all
+    @utilities = current_user.utilities.all
 
     respond_with @utilities
   end
 
   def new
-    @utility = Utility.new
+    @utility = current_user.utilities.new
   end
 
   def edit
-    @utility = Utility.find(params[:id])
+    @utility = current_user.utilities.find(params[:id])
   end
 
   def show
-    @utility = Utility.find(params[:id])
+    @utility = current_user.utilities.find(params[:id])
 
     respond_with @utility
   end
 
   def update
-    @utility = Utility.find(params[:id])
+    @utility = current_user.utilities.find(params[:id])
 
     flash[:notice] = "Utility updated successfully" if @utility.update(utility_params)
     respond_with @utility 
   end
 
   def create
-    @utility = Utility.new(utility_params)
+    @utility = current_user.utilities.new(utility_params)
 
     flash[:notice] = "Utility created successfully" if @utility.save
     respond_with @utility     
   end
 
   def destroy
-    @utility=Utility.find(params[:id])
+    @utility=current_user.utilities.find(params[:id])
     @utility.destroy
 
     flash[:success] = "Utility deleted, fight the power!" if @utility.destroyed?

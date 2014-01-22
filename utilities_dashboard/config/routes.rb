@@ -1,4 +1,5 @@
 UtilitiesDashboard::Application.routes.draw do
+  devise_for :users
   get "homes/show"
 
   resources :utilities

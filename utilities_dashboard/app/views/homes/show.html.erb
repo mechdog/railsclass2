@@ -1,29 +1,38 @@
 <h1>Show Home costs</h1>
 
-<div id="bills-chart"></div>
+<% if user_signed_in? %>
 
-<h2>Add a Bill</h2>
+  <div id="bills-chart"></div>
 
-<%= form_for Bill.new,
-  remote: true,
-  html: {class: 'form-inline', 
-  data: {type: :json}, 
-  id: 'new_bill_remote'} do |f|
-%>
-<div class="form-group">
-    <%= f.collection_select :utility_id, @utilities, :id, :name, {prompt: 'Select a utility'},
-      class:'form-control' %>
+  <h2>Add a Bill</h2>
+
+  <%= form_for Bill.new,
+    remote: true,
+    html: {class: 'form-inline', 
+    data: {type: :json}, 
+    id: 'new_bill_remote'} do |f|
+  %>
+  <div class="form-group">
+      <%= f.collection_select :utility_id, @utilities, :id, :name, {prompt: 'Select a utility'},
+        class:'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= f.number_field :amount, min: 0.01, step: 0.01, class: 'form-control', placeholder: 'Amount' %>
+  </div>
+
+  <div class="form-group">
+    <%= f.date_field :due_on, class: 'form-control', placeholder: 'Due On' %>
+  </div>
+
+  <%= f.submit 'Add Bill', class: 'btn btn-primary' %>
+
+  <% end %>
+
+<% else %>
+<div class="jumbotron">
+  <h1>Utilities Dashboard</h1>
+  <p>This makes it easy to see how much money they are taking from you!</p>
+  <p><%= link_to 'Sign up!', new_user_registration_path, class: 'btn btn-primary btn-lg' %></p>
 </div>
-
-<div class="form-group">
-  <%= f.number_field :amount, min: 0.01, step: 0.01, class: 'form-control', placeholder: 'Amount' %>
-</div>
-
-<div class="form-group">
-  <%= f.date_field :due_on, class: 'form-control', placeholder: 'Due On' %>
-</div>
-
-<%= f.submit 'Add Bill', class: 'btn btn-primary' %>
-
 <% end %>
-

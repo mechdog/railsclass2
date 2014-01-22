@@ -3,29 +3,29 @@ class BillsController < ApplicationController
 respond_to :html, :json
 
 def index
-    @bills = Bill.all
+    @bills = current_user.bills.all
 
     respond_with @bills
   end
 
   def new
-    @utilities = Utility.all
-    @bill = Bill.new
+    @utilities = current_user.utilities.all
+    @bill = current_user.bills.new
   end
 
   def edit
-    @utilities = Utility.all
-    @bill = Bill.find(params[:id])
+    @utilities = current_user.utilities.all
+    @bill = current_user.bills.find(params[:id])
   end
 
   def show
-     @bill = Bill.find(params[:id])
+     @bill = current_user.bills.find(params[:id])
 
      respond_with @bill
   end
 
   def update
-    @bill = Bill.find(params[:id])
+    @bill = current_user.bills.find(params[:id])
    
       flash[:notice] = "bill updated successfully!" if @bill.update(bill_params)
       respond_with @bill
@@ -33,7 +33,7 @@ def index
   end
 
   def create
-    @bill = Bill.new(bill_params)
+    @bill = current_user.bills.new(bill_params)
 
     flash[:notice] = "bill created successfully" if @bill.save
     respond_with @bill do |format|
@@ -43,7 +43,7 @@ def index
   end
 
   def destroy
-    @bill=Bill.find(params[:id])
+    @bill=current_user.bills.find(params[:id])
     @bill.destroy
 
     flash[:warning] = "bill deleted, fight the power!" if @bill.destroy?
