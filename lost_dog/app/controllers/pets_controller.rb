@@ -30,7 +30,7 @@ class PetsController < ApplicationController
   def update
     pet = Pet.find(params[:id])
 
-    if pet.update_attributes(pet_params)
+    if pet.update(pet_params)
       redirect_to pet_path(pet)
     else
       render :edit, status: :unprocessable_entity

@@ -1,0 +1,24 @@
+<ol class="breadcrumb">
+  <li><%= link_to 'Home', root_path %></li>
+  <li class="active">Bills</li>
+</ol>
+
+<%= link_to 'New Bill', new_bill_path, class: 'btn btn-success pull-right' %>
+<h2>Bills</h2>
+
+<table class="table">
+  <% @bills.each do |bill| %>
+    <tr>
+      <td>
+        <%= bill.utility.name %>
+      </td>
+      <td>
+        <%= bill.amount %>  
+      </td>
+      <td>
+        <%= link_to 'Show', bill_path(bill), class: 'btn btn-default' %>
+        <%= link_to 'Edit', edit_bill_path(bill), class: 'btn btn-default' %>
+      </td>
+    </tr>
+<% end  %>
+</table>

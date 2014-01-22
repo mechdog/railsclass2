@@ -1,0 +1,9 @@
+<ol class="breadcrumb">
+  <li><%= link_to 'Home', root_path %></li>
+  <li><%= link_to 'Bills', bills_path %></li>
+  <li class="active">Edit Bill<li>
+</ol>
+
+<h1>Edit Bill</h1>
+
+<%= render 'form', bill: @bill %>

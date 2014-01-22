@@ -1,5 +1,11 @@
 UtilitiesDashboard::Application.routes.draw do
   get "homes/show"
+
+  resources :utilities
+  resources :bills
+
+  root to: 'homes#show'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
@@ -55,5 +61,5 @@ UtilitiesDashboard::Application.routes.draw do
   #     resources :products
   #   end
 
-  root to: 'homes#show'
+
 end
