@@ -4,6 +4,7 @@ UtilitiesDashboard::Application.routes.draw do
 
   resources :utilities
   resources :bills
+  resources :utility_sharings, except: [:show, :edit, :update]
 
   root to: 'homes#show'
 

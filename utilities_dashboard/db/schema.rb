@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140122214854) do
+ActiveRecord::Schema.define(version: 20140122220856) do
 
   create_table "bills", force: true do |t|
     t.integer  "utility_id"
@@ -49,5 +49,14 @@ ActiveRecord::Schema.define(version: 20140122214854) do
   end
 
   add_index "utilities", ["user_id"], name: "index_utilities_on_user_id"
+
+  create_table "utility_sharings", force: true do |t|
+    t.integer  "utility_id"
+    t.string   "permission_level"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "utility_sharings", ["utility_id"], name: "index_utility_sharings_on_utility_id"
 
 end
