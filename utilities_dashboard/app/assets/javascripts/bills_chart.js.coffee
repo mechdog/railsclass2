@@ -94,7 +94,21 @@ class BillsChart
 
 $(document).on 'ready page:load', ->
   if $('#bills-chart').length > 0
-    data = $('#bills-chart').data('bills')
-    chart = new BillsChart(data, '#bills-chart')
-    chart.render()
+    chart = new BillsChart([], '#bills-chart')
+    $.ajax('/bills.json').done (bills_data) ->
+      chart.addAll(bills_data)
+      chart.render()
+
+    $('form#new_bill_remote').on 'ajax:success', (event, bill_data) ->
+      chart.addOne(bill_data)
+      chart.update()
+
+
+
+
+
+
+
+
+
 

@@ -36,7 +36,9 @@ def index
     @bill = Bill.new(bill_params)
 
     flash[:notice] = "bill created successfully" if @bill.save
-     respond_with @bill 
+    respond_with @bill do |format|
+      format.json { render 'show'}
+    end
 
   end
 
