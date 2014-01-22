@@ -7,12 +7,12 @@
 
 <dl>
   <dt>Color</dt>
-  <dd><%= @pet.color %></dd>
+  <dd class='<%= color_to_class(@pet.color) %>'><%= @pet.color %></dd>
 </dl>
 
 <dl>
   <dt>Last Seen</dt>
-  <dd><%= @pet.last_seen_at %></dd>
+  <dd><%= time_ago_in_words @pet.last_seen_at %> ago</dd>
 </dl>
 
 <div>

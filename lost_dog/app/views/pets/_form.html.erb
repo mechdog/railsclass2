@@ -7,16 +7,9 @@
     </ul>
   <% end %>
     
-<div>
-  <%= f.label :name %>
-  <%= f.text_field :name %>
-</div>
-
-<div>
-  <%= f.label :breed %>
-  <%= f.text_field :breed %>
-</div>
-
+  <%= pretty_text_field(f, :name) %>
+  <%= pretty_text_field(f, :breed) %>
+  
 <div>
   <%= f.label :color %>
   <%= f.select :color, ['black', 'white', 'spotted', 'brindle'] %>

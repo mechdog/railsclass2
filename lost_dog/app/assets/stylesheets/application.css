@@ -11,3 +11,25 @@
  *= require_self
  *= require_tree .
  */
+
+.color-black {
+  background-color: black;
+  color: white;
+}
+
+.color-white {
+  background-color: white;
+  color: black;
+}
+
+.color-spotted {
+  background-color: white;
+  color: lightsteelblue;
+}
+
+.color-brindle {
+  background-color: saddlebrown;
+  color: lightsteelblue;
+}
+
+
