@@ -15,6 +15,9 @@
       <td>
         <%= bill.amount %>  
       </td>
+       <td>
+        <%= bill.due_on %>  
+      </td>
       <td>
         <%= link_to 'Show', bill_path(bill), class: 'btn btn-default' %>
         <%= link_to 'Edit', edit_bill_path(bill), class: 'btn btn-default' %>
