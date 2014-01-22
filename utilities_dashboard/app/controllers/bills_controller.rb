@@ -1,7 +1,11 @@
 class BillsController < ApplicationController
 
+respond_to :html, :json
+
 def index
     @bills = Bill.all
+
+    respond_with @bills
   end
 
   def new
@@ -16,36 +20,32 @@ def index
 
   def show
      @bill = Bill.find(params[:id])
+
+     respond_with @bill
   end
 
   def update
     @bill = Bill.find(params[:id])
+   
+      flash[:notice] = "bill updated successfully!" if @bill.update(bill_params)
+      respond_with @bill
 
-    if @bill.update(bill_params)
-      flash[:notice] = "bill updated successfully!"
-      redirect_to bill_path(@bill)
-    else
-      render :edit, status: :unprocessable_entity
-    end
   end
 
   def create
     @bill = Bill.new(bill_params)
 
-    if @bill.save
-      flash[:notice] = "bill created successfully"
-      redirect_to bill_path(@bill)
-    else
-      render :new, status: :unprocessable_entity
-    end
+    flash[:notice] = "bill created successfully" if @bill.save
+     respond_with @bill 
+
   end
 
   def destroy
-    bill=Bill.find(params[:id])
-    bill.destroy
+    @bill=Bill.find(params[:id])
+    @bill.destroy
 
-    flash[:warning] = "bill deleted, fight the power!"
-    redirect_to bills_path
+    flash[:warning] = "bill deleted, fight the power!" if @bill.destroy?
+    respond_with @bill
 
   end
 

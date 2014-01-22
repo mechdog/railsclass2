@@ -1,7 +1,13 @@
 class UtilitiesController < ApplicationController
 
+# protect_from_forgery with: :null_session, only: :create # Ignores CSRF token
+
+respond_to :html, :json
+
   def index
     @utilities = Utility.all
+
+    respond_with @utilities
   end
 
   def new
@@ -13,38 +19,31 @@ class UtilitiesController < ApplicationController
   end
 
   def show
-     @utility = Utility.find(params[:id])
+    @utility = Utility.find(params[:id])
+
+    respond_with @utility
   end
 
   def update
     @utility = Utility.find(params[:id])
 
-    if @utility.update(utility_params)
-      flash[:notice] = "Utility updated successfully!"
-      redirect_to utility_path(@utility)
-    else
-      render :edit, status: :unprocessable_entity
-    end
+    flash[:notice] = "Utility updated successfully" if @utility.update(utility_params)
+    respond_with @utility 
   end
 
   def create
     @utility = Utility.new(utility_params)
 
-    if @utility.save
-      flash[:notice] = "Utility created successfully"
-      redirect_to utility_path(@utility)
-    else
-      render :new, status: :unprocessable_entity
-    end
+    flash[:notice] = "Utility created successfully" if @utility.save
+    respond_with @utility     
   end
 
   def destroy
-    utility=Utility.find(params[:id])
-    utility.destroy
+    @utility=Utility.find(params[:id])
+    @utility.destroy
 
-    flash[:warning] = "Utility deleted, fight the power!"
-    redirect_to utilities_path
-
+    flash[:success] = "Utility deleted, fight the power!" if @utility.destroyed?
+    respond_with @utility
   end
 
 
