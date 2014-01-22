@@ -11,6 +11,7 @@
 // about supported directives.
 //
 //= require bootstrap
+//= require d3.v3
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
