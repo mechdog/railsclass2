@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+
+  <body>
+    <p>
+      Hi There, we thought you sjould know you need to pay your friend <%= @sharer.email %> bill.
+      They are stiffing you for thier: <%= link_to @utility.name, utility_url(@utility) %>
+    </p>
+  </body>
+
+</html>

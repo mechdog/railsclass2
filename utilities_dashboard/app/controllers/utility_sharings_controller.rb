@@ -20,7 +20,10 @@ class UtilitySharingsController < ApplicationController
     @utilities = current_user.utilities
     @utility_sharing = current_user.utility_sharings.new(utility_sharing_params)
 
-    flash[:success] = 'Utility shared' if @utility_sharing.save
+    if @utility_sharing.save
+      flash[:success] = 'Utility shared' 
+      UtilitySharingMailer.shared_utility_email(@utility_sharing, current_user).deliver
+    end
 
     respond_with @utility_sharing, location: utility_sharings_path
   end
