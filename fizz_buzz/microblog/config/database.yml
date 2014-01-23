@@ -19,7 +19,7 @@ development:
   encoding: unicode
   database: microblog_development
   pool: 5
-  username: microblog
+  username: mkenney
   password:
 
   # Connect on a TCP socket. Omitted by default since the client uses a
@@ -48,7 +48,7 @@ test:
   encoding: unicode
   database: microblog_test
   pool: 5
-  username: microblog
+  username: mkenney
   password:
 
 production:
@@ -56,5 +56,5 @@ production:
   encoding: unicode
   database: microblog_production
   pool: 5
-  username: microblog
+  username: mkenney
   password:
