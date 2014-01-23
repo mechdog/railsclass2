@@ -1,0 +1,21 @@
+<%= form_for utility_sharing do |f| %>
+  <div class="form-group">
+      <%= f.label :utility %>
+      <%= f.collection_select :utility_id, utilities, :id, :name, {},
+            class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :user,  'User to share with' %>
+    <%= f.collection_select :user_id, @users, :id, :email, {},
+      classs: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :permission_level %>
+    <%= f.select :permission_level, UtilitySharing::PERMISSION_LEVELS %>
+  </div>
+
+<%= f.submit 'Share', class:'btn btn-primary' %>
+
+<% end %>

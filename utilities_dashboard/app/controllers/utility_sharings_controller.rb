@@ -8,7 +8,7 @@ class UtilitySharingsController < ApplicationController
   end
 
   def new
-    @users = Users.all
+    @users = User.all
     @utilities = current_user.utilities
     @utility_sharing = current_user.utility_sharings.new
 
@@ -16,10 +16,13 @@ class UtilitySharingsController < ApplicationController
   end
 
   def create
-    @utility_sharing = current_user.utilities.new(utility_sharing_params)
+    @users = User.all
+    @utilities = current_user.utilities
+    @utility_sharing = current_user.utility_sharings.new(utility_sharing_params)
 
     flash[:success] = 'Utility shared' if @utility_sharing.save
-    respond_with @utility_sharing, location: utility_sharing_path
+
+    respond_with @utility_sharing, location: utility_sharings_path
   end
 
   def destroy

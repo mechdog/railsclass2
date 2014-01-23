@@ -1,6 +1,6 @@
 class UtilitiesController < ApplicationController
  after_action :verify_authorized, except: :index
- after_action :verify_scoped, only: :index
+ after_action :verify_policy_scoped, only: :index
 
 # protect_from_forgery with: :null_session, only: :create # Ignores CSRF token
 before_filter :authenticate_user!
@@ -54,7 +54,7 @@ respond_to :html, :json
     @utility=Utility.find(params[:id])
 
     authorize @utility
-    
+
     @utility.destroy
 
     flash[:success] = "Utility deleted, fight the power!" if @utility.destroyed?

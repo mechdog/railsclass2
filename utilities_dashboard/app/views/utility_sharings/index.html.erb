@@ -1,0 +1,29 @@
+<ol class="breadcrumb">
+  <li><%= link_to 'Home', root_path %></li>
+  <li class="active">Share Utilities</li>
+</ol>
+
+<%= link_to 'Share a Utility', new_utility_sharing_path, class: 'btn btn-success pull-right' %>
+<h2>Share Utilities</h2>
+
+<table class="table">
+  <tr>
+    <th>Utility</th>
+    <th>User to share with</th>
+    <th>Permission Level</th>
+    <th></th>
+  </tr>
+  <% @utility_sharings.each do |utility_sharing| %>
+    <tr>
+      <td><%= utility_sharing.utility.name %></td>
+      <td><%= utility_sharing.user.email %></td>
+      <td><%= UtilitySharing::PERMISSION_LEVELS.invert[utility_sharing.permission_level] %></td>
+      <td>
+        <%= link_to 'Unshare', utility_sharing,
+            method: :delete,
+            confirm: 'Are you sure you want to unshare this',
+            class: 'btn btn-danger' %>
+      </td>
+    </tr>
+  <% end %>
+</table>

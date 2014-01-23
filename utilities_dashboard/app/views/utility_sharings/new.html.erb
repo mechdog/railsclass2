@@ -1,0 +1,10 @@
+<ol class="breadcrumb">
+  <li><%= link_to 'Home', root_path %></li>
+  <li><%= link_to 'Share Utilities', utility_sharings_path %></li>
+  <li class='active'>Share a utility</li>
+</ol>
+
+<h2>Share a utility</h2>
+
+
+<%= render 'form', utility_sharing: @utility_sharing, utilities: @utilities %>

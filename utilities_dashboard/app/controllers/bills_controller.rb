@@ -1,11 +1,11 @@
 class BillsController < ApplicationController
  after_action :verify_authorized, except: :index
- after_action :verify_scoped, only: :index
+ after_action :verify_policy_scoped, only: :index
 
 respond_to :html, :json
 
 def index
-    @bills = current_user.bills.all
+    @bills = policy_scope(Bill)
 
     respond_with @bills
   end

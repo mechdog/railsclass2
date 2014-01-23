@@ -8,6 +8,6 @@ class UtilitySharing < ActiveRecord::Base
   belongs_to :user
 
   validates :utility, :user, :permission_level, presence: true
-  validates :permission_level, inclusion: {in: PERMISSION_LEVELS}
+  validates :permission_level, inclusion: {in: PERMISSION_LEVELS.values}
 
 end
