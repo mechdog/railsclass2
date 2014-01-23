@@ -1,5 +1,5 @@
 class UtilitySharingsController < ApplicationController 
-  respond_to :html
+  respond_to :html, :js
 
   def index
     @utility_sharings = current_user.utility_sharings
@@ -29,8 +29,15 @@ class UtilitySharingsController < ApplicationController
     @utility_sharing = current_user.utility_sharings.find(params[:id])
     @utility_sharing.destroy
 
-    flash[:success] = 'Utlity unshared' if @utility_sharing.destroyed?
-    respond_with @utility_sharing
+    respond_with do |format| 
+      if @utility_sharing.destroyed? 
+        format.html { redirect_to utility_sharings_path, success: 'Utlity unshared' }
+        format.js { head :ok }
+      else
+        format.html { redirect_to utility_sharings_path, error: 'No Deletey' } #bad code
+        format.js { head :error }  #bad code
+      end
+    end
   end
 
   private
