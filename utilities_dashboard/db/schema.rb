@@ -53,6 +53,7 @@ ActiveRecord::Schema.define(version: 20140122220856) do
   create_table "utility_sharings", force: true do |t|
     t.integer  "utility_id"
     t.string   "permission_level"
+    t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

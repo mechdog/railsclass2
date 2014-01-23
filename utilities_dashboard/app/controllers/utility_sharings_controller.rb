@@ -1,4 +1,4 @@
-class UtilitySharingsController < ApplicationController
+class UtilitySharingsController < ApplicationController 
   respond_to :html
 
   def index

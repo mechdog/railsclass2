@@ -1,6 +1,9 @@
 class HomesController < ApplicationController
+  after_filter :verify_policy_scoped
+
   def show
-    @utilities = current_user.utilities.all if user_signed_in?
+    # binding.pry
+    @utilities = policy_scope(Utility)
     # @bills = Bill.order(:due_on).all
   end
 end

@@ -1,4 +1,6 @@
 class BillsController < ApplicationController
+ after_action :verify_authorized, except: :index
+ after_action :verify_scoped, only: :index
 
 respond_to :html, :json
 
@@ -9,12 +11,12 @@ def index
   end
 
   def new
-    @utilities = current_user.utilities.all
+    @utilities = policy_scope(Utility)
     @bill = current_user.bills.new
   end
 
   def edit
-    @utilities = current_user.utilities.all
+    @utilities = policy_scope(Utility)
     @bill = current_user.bills.find(params[:id])
   end
 
