@@ -9,8 +9,8 @@ else
   CarrierWave.configure do |config|
     config.fog_credentials = {
       :provider               => 'AWS',
-      :aws_access_key_id      => 'AKIAJXSIPKWQVNP33V5Q',
-      :aws_secret_access_key  => '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'
+      :aws_access_key_id      => '[ACCESS KEY]',
+      :aws_secret_access_key  => '[SECRET KEY]'
     }
     config.fog_directory = 'lost_dog'
   end
